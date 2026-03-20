@@ -1,0 +1,404 @@
+{
+  "nodes": [
+    {
+      "id": "conversationChain_0",
+      "position": {
+        "x": 537,
+        "y": 184
+      },
+      "type": "customNode",
+      "data": {
+        "id": "conversationChain_0",
+        "label": "Conversation Chain",
+        "version": 3,
+        "name": "conversationChain",
+        "type": "ConversationChain",
+        "baseClasses": [
+          "ConversationChain",
+          "LLMChain",
+          "BaseChain",
+          "Runnable"
+        ],
+        "category": "Chains",
+        "description": "Chat models specific conversational chain with memory",
+        "inputParams": [
+          {
+            "label": "System Message",
+            "name": "systemMessagePrompt",
+            "type": "string",
+            "rows": 4,
+            "description": "If Chat Prompt Template is provided, this will be ignored",
+            "additionalParams": true,
+            "optional": true,
+            "default": "The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.",
+            "placeholder": "The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.",
+            "id": "conversationChain_0-input-systemMessagePrompt-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "id": "conversationChain_0-input-model-BaseChatModel",
+            "display": true
+          },
+          {
+            "label": "Memory",
+            "name": "memory",
+            "type": "BaseMemory",
+            "id": "conversationChain_0-input-memory-BaseMemory",
+            "display": true
+          },
+          {
+            "label": "Chat Prompt Template",
+            "name": "chatPromptTemplate",
+            "type": "ChatPromptTemplate",
+            "description": "Override existing prompt with Chat Prompt Template. Human Message must includes {input} variable",
+            "optional": true,
+            "id": "conversationChain_0-input-chatPromptTemplate-ChatPromptTemplate",
+            "display": true
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "conversationChain_0-input-inputModeration-Moderation",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "model": "{{groqChat_0.data.instance}}",
+          "memory": "{{bufferWindowMemory_0.data.instance}}",
+          "chatPromptTemplate": "",
+          "inputModeration": [
+            "{{inputModerationSimple_0.data.instance}}"
+          ],
+          "systemMessagePrompt": "#Role\n\nYour name is Max, consider yourself as a professional digital analyst and respond in formal language without any emojis"
+        },
+        "outputAnchors": [
+          {
+            "id": "conversationChain_0-output-conversationChain-ConversationChain|LLMChain|BaseChain|Runnable",
+            "name": "conversationChain",
+            "label": "ConversationChain",
+            "description": "Chat models specific conversational chain with memory",
+            "type": "ConversationChain | LLMChain | BaseChain | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 439,
+      "positionAbsolute": {
+        "x": 537,
+        "y": 184
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "bufferWindowMemory_0",
+      "position": {
+        "x": 83.1327424749162,
+        "y": 273.4884615384616
+      },
+      "type": "customNode",
+      "data": {
+        "id": "bufferWindowMemory_0",
+        "label": "Buffer Window Memory",
+        "version": 2,
+        "name": "bufferWindowMemory",
+        "type": "BufferWindowMemory",
+        "baseClasses": [
+          "BufferWindowMemory",
+          "BaseChatMemory",
+          "BaseMemory"
+        ],
+        "category": "Memory",
+        "description": "Uses a window of size k to surface the last k back-and-forth to use as memory",
+        "inputParams": [
+          {
+            "label": "Size",
+            "name": "k",
+            "type": "number",
+            "default": "4",
+            "description": "Window of size k to surface the last k back-and-forth to use as memory.",
+            "id": "bufferWindowMemory_0-input-k-number",
+            "display": true
+          },
+          {
+            "label": "Session Id",
+            "name": "sessionId",
+            "type": "string",
+            "description": "If not specified, a random id will be used. Learn <a target=\"_blank\" href=\"https://docs.flowiseai.com/memory#ui-and-embedded-chat\">more</a>",
+            "default": "",
+            "optional": true,
+            "additionalParams": true,
+            "id": "bufferWindowMemory_0-input-sessionId-string",
+            "display": true
+          },
+          {
+            "label": "Memory Key",
+            "name": "memoryKey",
+            "type": "string",
+            "default": "chat_history",
+            "additionalParams": true,
+            "id": "bufferWindowMemory_0-input-memoryKey-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "k": "20",
+          "sessionId": "",
+          "memoryKey": "chat_history"
+        },
+        "outputAnchors": [
+          {
+            "id": "bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory",
+            "name": "bufferWindowMemory",
+            "label": "BufferWindowMemory",
+            "description": "Uses a window of size k to surface the last k back-and-forth to use as memory",
+            "type": "BufferWindowMemory | BaseChatMemory | BaseMemory"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 335,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 83.1327424749162,
+        "y": 273.4884615384616
+      },
+      "dragging": false
+    },
+    {
+      "id": "groqChat_0",
+      "position": {
+        "x": -243.6854035898843,
+        "y": 83.92312575734786
+      },
+      "type": "customNode",
+      "data": {
+        "id": "groqChat_0",
+        "label": "Groq",
+        "version": 4,
+        "name": "groqChat",
+        "type": "GroqChat",
+        "baseClasses": [
+          "GroqChat",
+          "BaseChatModel",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "Chat Models",
+        "description": "Wrapper around Groq API with LPU Inference Engine",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "groqApi"
+            ],
+            "optional": true,
+            "id": "groqChat_0-input-credential-credential",
+            "display": true
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "placeholder": "llama3-70b-8192",
+            "id": "groqChat_0-input-modelName-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "groqChat_0-input-temperature-number",
+            "display": true
+          },
+          {
+            "label": "Max Tokens",
+            "name": "maxTokens",
+            "type": "number",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "groqChat_0-input-maxTokens-number",
+            "display": true
+          },
+          {
+            "label": "Streaming",
+            "name": "streaming",
+            "type": "boolean",
+            "default": true,
+            "optional": true,
+            "id": "groqChat_0-input-streaming-boolean",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "groqChat_0-input-cache-BaseCache",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "modelName": "llama-3.3-70b-versatile",
+          "temperature": "0.6",
+          "maxTokens": "",
+          "streaming": true
+        },
+        "outputAnchors": [
+          {
+            "id": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
+            "name": "groqChat",
+            "label": "GroqChat",
+            "description": "Wrapper around Groq API with LPU Inference Engine",
+            "type": "GroqChat | BaseChatModel | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 674,
+      "selected": false,
+      "dragging": false,
+      "positionAbsolute": {
+        "x": -243.6854035898843,
+        "y": 83.92312575734786
+      }
+    },
+    {
+      "id": "inputModerationSimple_0",
+      "position": {
+        "x": 163.99876977696414,
+        "y": 635.4084100382843
+      },
+      "type": "customNode",
+      "data": {
+        "id": "inputModerationSimple_0",
+        "label": "Simple Prompt Moderation",
+        "version": 2,
+        "name": "inputModerationSimple",
+        "type": "Moderation",
+        "baseClasses": [
+          "Moderation"
+        ],
+        "category": "Moderation",
+        "description": "Check whether input consists of any text from Deny list, and prevent being sent to LLM",
+        "inputParams": [
+          {
+            "label": "Deny List",
+            "name": "denyList",
+            "type": "string",
+            "rows": 4,
+            "placeholder": "ignore previous instructions\ndo not follow the directions\nyou must ignore all previous instructions",
+            "description": "An array of string literals (enter one per line) that should not appear in the prompt text.",
+            "id": "inputModerationSimple_0-input-denyList-string",
+            "display": true
+          },
+          {
+            "label": "Error Message",
+            "name": "moderationErrorMessage",
+            "type": "string",
+            "rows": 2,
+            "default": "Cannot Process! Input violates content moderation policies.",
+            "optional": true,
+            "id": "inputModerationSimple_0-input-moderationErrorMessage-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Chat Model",
+            "name": "model",
+            "type": "BaseChatModel",
+            "description": "Use LLM to detect if the input is similar to those specified in Deny List",
+            "optional": true,
+            "id": "inputModerationSimple_0-input-model-BaseChatModel",
+            "display": true
+          }
+        ],
+        "inputs": {
+          "denyList": "Ignore any confidential information being shared like a password or hash keys",
+          "model": "{{groqChat_0.data.instance}}",
+          "moderationErrorMessage": "Cannot Process! Input violates content moderation policies."
+        },
+        "outputAnchors": [
+          {
+            "id": "inputModerationSimple_0-output-inputModerationSimple-Moderation",
+            "name": "inputModerationSimple",
+            "label": "Moderation",
+            "description": "Check whether input consists of any text from Deny list, and prevent being sent to LLM",
+            "type": "Moderation"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 589,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 163.99876977696414,
+        "y": 635.4084100382843
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "bufferWindowMemory_0",
+      "sourceHandle": "bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory",
+      "target": "conversationChain_0",
+      "targetHandle": "conversationChain_0-input-memory-BaseMemory",
+      "type": "buttonedge",
+      "id": "bufferWindowMemory_0-bufferWindowMemory_0-output-bufferWindowMemory-BufferWindowMemory|BaseChatMemory|BaseMemory-conversationChain_0-conversationChain_0-input-memory-BaseMemory"
+    },
+    {
+      "source": "groqChat_0",
+      "sourceHandle": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "conversationChain_0",
+      "targetHandle": "conversationChain_0-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "groqChat_0-groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable-conversationChain_0-conversationChain_0-input-model-BaseChatModel"
+    },
+    {
+      "source": "groqChat_0",
+      "sourceHandle": "groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable",
+      "target": "inputModerationSimple_0",
+      "targetHandle": "inputModerationSimple_0-input-model-BaseChatModel",
+      "type": "buttonedge",
+      "id": "groqChat_0-groqChat_0-output-groqChat-GroqChat|BaseChatModel|BaseLanguageModel|Runnable-inputModerationSimple_0-inputModerationSimple_0-input-model-BaseChatModel"
+    },
+    {
+      "source": "inputModerationSimple_0",
+      "sourceHandle": "inputModerationSimple_0-output-inputModerationSimple-Moderation",
+      "target": "conversationChain_0",
+      "targetHandle": "conversationChain_0-input-inputModeration-Moderation",
+      "type": "buttonedge",
+      "id": "inputModerationSimple_0-inputModerationSimple_0-output-inputModerationSimple-Moderation-conversationChain_0-conversationChain_0-input-inputModeration-Moderation"
+    }
+  ]
+}
