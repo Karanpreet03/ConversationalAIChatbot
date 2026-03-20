@@ -13,7 +13,7 @@
 > **A fully functional conversational AI agent built on a 100% free stack — designed for data Q&A, analytics insights, and real-world deployability.**
 
 <br/>
-
+**Link for the chatbot: ** https://cloud.flowiseai.com/chatbot/5674ab82-ad55-40f4-b774-5c16944ad94f
 ---
 
 </div>
